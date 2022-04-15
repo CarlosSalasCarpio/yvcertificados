@@ -1,0 +1,76 @@
+{% extends "pdf_manager/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Admin page
+{% endblock %}
+
+{% block main %}
+
+{% if message %}
+    <div class="alert alert-danger">
+        <strong>{{ message }}</strong>
+    </div>
+    <br>
+{% endif %}
+
+{% if message_success %}
+    <div class="alert alert-success">
+        <strong>{{ message_success }}</strong>
+    </div>
+    <br>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row gx-5">
+        <div class="col">
+            <div class="p-3 border bg-light">
+
+                <h3>Actualizar desprendibles de nómina (PDF)</h3> <br>
+                
+                {{ form | crispy }}
+
+                <button class="btn btn-primary" type="submit" name='submit_button' value="pdf">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div style="overflow-x:auto;">
+    <table style="color: #F8F9FA;" class="table">
+        <thead>
+            <th>Quincena</th>
+            <th>Mes</th>
+            <th>Año</th>
+            <th>Descargar</th>
+            <th>Eliminar</th>
+        </thead>
+            {% for desprendible in desprendibles %}
+                <tr>
+                    <td>{{ desprendible.quincena }}</td>
+                    <td>{{ desprendible.mes }}</td>
+                    <td>{{ desprendible.año }}</td>
+                    <td>
+                        <form method="post" action="{% url 'download_desprendible' %}">
+                            {% csrf_token %}
+                            <input style="display: none;" class="form-control" name="pdf_download" type="text" value="{{ desprendible.pdf }}">
+                            <button type="submit" class="btn btn-primary btn-sm">Descargar</button>
+                        </form>
+                    </td>
+                    <!-- <td><a href="{{ desprendible.pdf }}" class="btn btn-primary btn-sm" target="newtab">Descargar</a></td> -->
+                    <td>
+                        <form method="post" action="{% url 'delete_desprendible' desprendible.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form> 
+                    </td>
+                </tr>
+            {% endfor %}    
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

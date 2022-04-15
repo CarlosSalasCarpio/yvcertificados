@@ -1,0 +1,43 @@
+{% extends "pdf_manager/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Admin page
+{% endblock %}
+
+{% block main %}
+
+{% if message %}
+    <div class="alert alert-danger">
+        <strong>{{ message }}</strong>
+    </div>
+    <br>
+{% endif %}
+
+{% if message_success %}
+    <div class="alert alert-success">
+        <strong>{{ message_success }}</strong>
+    </div>
+    <br>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row gx-5">
+        <div class="col">
+            <div class="p-3 border bg-light">
+
+                <h3>Actualizar información de empleados (CSV)</h3> <br>
+                
+                <div style="width: 25%; margin: 0 auto;">
+                {{ upload_csv_form | crispy }}
+                </div>
+
+                <button class="btn btn-primary" type="submit" name='submit_button' value="csv">Actualizar</button>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

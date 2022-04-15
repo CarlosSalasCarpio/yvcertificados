@@ -1,0 +1,31 @@
+{% extends "pdf_manager/layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+
+{% if message %}
+    <div class="alert alert-danger">
+        <strong>{{ message }}</strong>
+    </div>
+    <br>
+{% endif %}
+            
+<div class="row gx-5">
+    <div class="col">
+        <div class="p-3 border bg-light">
+            <form method="post">
+                {% csrf_token %}
+                <h1>Inicio de sesión</h1> <br>
+                <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Número de identificación" type="text"> <br>
+                <input class="form-control" name="password" placeholder="Contraseña" type="password"> <br>
+                <button class="btn btn-primary" type="submit">Iniciar sesión</button> <br><br>
+            </form>
+            <a href="{% url 'reset_password' %}">Recuperar contraseña</a>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

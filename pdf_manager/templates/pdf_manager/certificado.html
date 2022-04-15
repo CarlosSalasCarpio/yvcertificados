@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Y&V INGENIERÍA Y CONTRUCCIÓN: Certificado Laboral</title>
+        <style type="text/css">
+            body {
+                font-weight: 200;
+                font-size: 14px;
+            }
+            .header {
+                padding: 20px 20px 50px 20px;
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                
+            }
+            .details {
+                padding: 0px 40px 0px 40px;
+                text-align: justify !important;
+                font-family: Arial, Helvetica, sans-serif;
+                /*margin-left: 40%;*/
+            }
+
+        </style>
+    </head>
+    <body>
+    {% load static %}
+        <img width="250" src="{{ logo }}"> <br><br>
+        <div style="text-align: center;" class='header'>
+            <h1>  
+                {{ company }} <br>
+                {{ nit }} <br><br>
+                <span style="font-style: italic;">CERTIFICACIÓN</span>
+            </h1>
+        </div>
+        <div>
+        <div class='details'>
+            <p>
+                El Departamento de Talento Humano de {{ company }}. Se permite certificar que el señor(a) {{ name }}, identificado(a) con 
+                {{ document_type }}: {{ id }} labora en la compañía desde el {{ hire_date }} hasta la fecha, desempeñando el cargo de 
+                {{ possition }} con el tipo de contrato a {{ contract_type }} con una asignación 
+                salarial de $ {{ salary }}. <br><br><br>
+
+                Se expide la presente certificación a solicitud del interesado el {{ today }}. 
+            </p>
+
+            <p style="padding: 100px 40px 100px 40px;">
+                <img width="300" src="{{ firma }}"> <br>
+                Sandra Benavides | Coordinadora de desarrollo organizacional | Y&V <br>
+                Calle 119 No. 13 - 45 piso 3, Edificio ARZ | Bogotá - Colombia <br>
+                PBX: (+571) 742 42 17 / 917 21 10 Ext. 104 <br>
+                Cel.: (+57) 323-4207558 <br>
+                <a href="http://www.yvsite.com">http://www.yvsite.com</a> <br>
+                <img width="100" src="{{ logo }}"> <br>
+                <span style="font-style: italic;">¡Orgullosos de construir el futuro día a día!</span>
+            </p>
+
+        </div>
+
+        <img src="{{ footer }}"> <br><br>
+
+    </body>
+</html>

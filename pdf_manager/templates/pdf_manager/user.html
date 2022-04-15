@@ -1,0 +1,58 @@
+{% extends "pdf_manager/layout.html" %}
+
+{% block title %}
+    Certificates
+{% endblock %}
+
+{% block main %}
+
+{% if message %}
+    <div class="alert alert-danger">
+        <strong>{{ message }}</strong>
+    </div>
+    <br>
+{% endif %}
+
+
+
+<form method="post">
+    {% csrf_token %}
+    <div class="row gx-5">
+        <div class="col">
+            <div style="text-align: left" class="p-3 border bg-light">
+                <p >Bienvenido {{ nombre }}: <br> <strong>ID:</strong> {{ username }} <br> <strong>Email:</strong> {{ email }} <p>
+                <h2>Descarga de documentos</h2> <br>
+                <h3>Certificaciones laborales</h3> <br>
+                <button class="btn btn-primary" type="submit" name="submit_button" value="certificate" target="newtab">Descargar certificación laboral</button> <br><br>
+                <h3>Desprendibles de nóminas</h3>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div style="overflow-x:auto;"></div>
+    <table style="color: #F8F9FA;" class="table">
+        <thead>
+            <th>Desprendible de nómina</th>
+            <th>Descargar</th>
+        </thead>
+            {% for desprendible in desprendibles %}
+                <tr>
+                    <td>{{ desprendible.quincena }} quincena {{ desprendible.mes }} {{ desprendible.año }}</td>
+                    <td>
+                        <form method="post" action="{% url 'download_desprendible_user' %}">
+                            {% csrf_token %}
+                            <input style="display: none;" class="form-control" name="pdf_name" type="text" value="{{ desprendible.quincena }}Quincena{{ desprendible.mes }}{{ desprendible.año }}">
+                            <input style="display: none;" class="form-control" name="pdf_download" type="text" value="{{ desprendible.pdf }}">
+                            <button type="submit" class="btn btn-primary btn-sm">Descargar desprendible</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}    
+        <tbody>
+
+        </tbody>
+    </table>
+</div>
+    
+{% endblock %}

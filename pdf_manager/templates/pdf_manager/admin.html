@@ -1,0 +1,32 @@
+{% extends "pdf_manager/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Admin page
+{% endblock %}
+
+{% block main %}
+
+<h2 style="color: #F8F9FA;">Actualizar base de datos</h2> <br>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="row gx-5">
+        <div class="col">
+            <div class="p-3 border bg-light">
+
+                <button style="margin: 50px;" class="btn btn-primary" type="submit" name='submit_button' value="csv">Actualizar información de empleados (CSV)</button>
+
+            </div>
+        </div>
+        <div class="col">
+            <div class="p-3 border bg-light">  
+
+                <button style="margin: 50px;" class="btn btn-primary" type="submit" name='submit_button' value="pdf">Actualizar desprendibles de nómina (PDF)</button>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
